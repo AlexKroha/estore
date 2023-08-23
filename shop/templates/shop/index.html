@@ -1,0 +1,141 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block mastehead %}
+
+<div class="container h-100">
+                <div class="row h-100 align-items-center justify-content-center text-center">
+                    <div class="col-lg-10 align-self-end">
+                        <h1 class="text-uppercase text-white font-weight-bold">Ваши любимые торты, пироги, пирожки, десерты, салаты</h1>
+                        <hr class="divider my-4" />
+                    </div>
+                    <div class="col-lg-8 align-self-baseline">
+                        <p class="text-white-75 font-weight-light mb-3">Готовим и оформляем торты с учетом Ваших пожеланий.</p>
+                        <p class="text-white-75 font-weight-light mb-3">Печём нежнейшие пироги по уникальной рецептуре.</p>
+                        <p class="text-white-75 font-weight-light mb-3">Порадуем Вас нежными десертами, легкими и полезнми салатами.</p>
+                        <a class="btn btn-primary btn-xl js-scroll-trigger" href="{% url 'category_list' %}">Выберите категорию</a>
+                    </div>
+                </div>
+            </div>
+{% endblock mastehead %}
+{% block content %}
+<!-- About-->
+        <section class="page-section " id="about" style="background: #5f5045">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8 text-center">
+                        <h2 class="text-white mt-0">Мы помогаем делать праздник!</h2>
+                        <hr class="divider light my-4" />
+                                <p class="text-white-50 mb-4">Мы - дружная команда, занимающаяся приготовлением заказных тортов,
+                            пирогов, пирожков и салатов.</p>
+                                <p class="text-white-50 mb-4">Принимаем заказы с индивидуальным пожеланиями.</p>
+                                <p class="text-white-50 mb-4">Готовим с любовью и качеством.</p>
+                                <p class="text-white-50 mb-4">Принимаем заказы на сумму от 1000 рублей.</p>
+                                <p class="text-white-50 mb-4">Доставка по г. Иркутску 200р, доставка в отдаленные районы обсуждается индивидуально.</p>
+
+                        <a class="btn btn-light btn-xl js-scroll-trigger" href="{% url 'category_list' %}">Сделать заказ!</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Services-->
+        <section class="page-section" id="services">
+            <div class="container">
+                <h2 class="text-center mt-0">Испечём уникальный торт или пирог</h2>
+                <h2 class="text-center mt-0">Приготовим вкусный салат</h2>
+                <hr class="divider my-4" />
+                <div class="row">
+
+                    {% for c in categories %}
+
+                        <div class="col-lg-3 col-md-6 text-center">
+                        <div class="mt-5">
+                            <a class="text-decoration-none text-dark" href="{{ c.get_absolute_url }}"><img class="mb-2" src="{{ c.image_icon.url }}" style="width: 80px; height: auto" alt="">
+                            <h3 class="h4 mb-2">{{ c.name }}</h3></a>
+                            <a href="{{ c.get_absolute_url }}" class="text-decoration-none text-muted mb-0">{{ c.slogan }}</a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+        <!-- Portfolio-->
+        <div id="portfolio1">
+            <div class="container-fluid p-0">
+                <div class="row no-gutters">
+
+                    {% for p in products %}
+                        {% if p.image and p.portfolio %}
+                         <div class="col-lg-2 col-md-4 col-sm-6">
+                             <a href="{{ p.get_absolute_url }}">
+
+                            <img class="img-fluid" src="{{ p.image.url }}" alt="{{ p.name }}" />
+                             </a>
+                         </div>
+                        {% endif %}
+
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <!-- Call to action-->
+        <section class="page-section bg-dark text-white" id="delivery">
+            <div class="container text-center">
+                <h2 class="mb-4">Обращаем Ваше внимание, что мы работаем с заказами от 1000 Р</h2>
+                <h2 class="mb-4">Доставка по г. Иркутску 200р.</h2>
+                <a class="btn btn-light btn-xl" href="{% url 'category_list' %}">Перейти к заказам!</a>
+            </div>
+        </section>
+        <!-- Contact-->
+        <section class="page-section" id="contact">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8 text-center">
+                        <h2 class="mt-0">Сделайте заказ любым удобным способом!</h2>
+                        <hr class="divider my-4" />
+                        <p class="text-muted mb-5">
+                            Делайте заказ любым удобным способом, задавайте вопросы и оставляйте пожелания по телефону
+                            или в электронную почту! Сделать заказ, также, можно самостоятельно!
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4 ml-auto text-center mb-5 mb-lg-0">
+                        <i class="fas fa-phone fa-3x mb-3 text-muted"></i>
+                        <div><h5>+7 (962) 315-85-64</h5></div>
+                    </div>
+                    <div class="col-lg-4 mr-auto text-center">
+                        <i class="fas fa-envelope fa-3x mb-3 text-muted"></i>
+                        <!-- Make sure to change the email address in BOTH the anchor text and the link target below!-->
+                        <a class="d-block" href="mailto:contact@yourwebsite.com">contact@yourwebsite.com</a>
+                    </div>
+                    <div class="col-lg-4 mt-3 mr-auto text-center">
+                        <h5>Перейдите в каталог и выберите сами</h5>
+                        <!-- Make sure to change the email address in BOTH the anchor text and the link target below!-->
+                        <a class="btn btn-outline-secondary" href="{% url 'category_list' %}">Заказать</a>
+                    </div>
+                </div>
+<hr/>
+                <h1 class="text-center">Оставьте заявку</h1>
+<div class="container" >
+      <form method="post">
+        {% csrf_token %}
+          <div class="table">
+            <table class="table">
+
+{{ form }}
+            </table>
+
+        <p class="text-center"><input class="btn btn-primary" type="submit" value="Отправить"></p>
+        </div>
+
+{#        {{ form.as_p }}#}
+{#        <div class="form-actions form-group ">#}
+{#          <button type="submit" class="form-control btn btn-success">Отправить</button>#}
+{#        </div>#}
+      </form>
+    </div>
+
+            </div>
+        </section>
+{% endblock content %}
